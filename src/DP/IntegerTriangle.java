@@ -30,6 +30,7 @@ public class IntegerTriangle {
 		}
 		
 		System.out.println(triangle[0][0]);
+		
 	}
 
 }
