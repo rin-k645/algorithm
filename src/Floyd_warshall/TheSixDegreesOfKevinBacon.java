@@ -1,4 +1,4 @@
-package GraphTraversal;
+package Floyd_warshall;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class TheSixDegreesOfKevinBacon {
 		int M = Integer.parseInt(input1[1]);
 		
 		int[][] dist = new int[N + 1][N + 1];
-		for(int i = 1; i < N + 1; i++) { // 플로이드 초기 거리 테이블 초기화
+		for(int i = 1; i < N + 1; i++) { // 플로이드 와샬 초기 거리 테이블 초기화
 			for(int j = 1; j < N + 1; j++) {
 				if(i == j) {
 					dist[i][j] = 0;
@@ -25,6 +25,7 @@ public class TheSixDegreesOfKevinBacon {
 				dist[i][j] = INF;
 			}
 		}
+		
 		
 		for(int i = 0; i < M; i++) {
 			String[] input2 = br.readLine().split(" ");
