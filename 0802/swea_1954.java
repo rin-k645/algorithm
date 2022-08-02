@@ -41,7 +41,7 @@ public class swea_1954 {
 					
 			}
 			
-			//출력
+			//출력 
 			System.out.println("#" + test_case);
 			
 			for(int i = 0; i < N; i++) {
