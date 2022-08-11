@@ -3,9 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class b17406 {
+public class Main {
 	static int N, M, K;
 	static int[][] A;
+	static int[][] A_copy;
 	static boolean[] visited;
 	static Operation[] ops;
 	static Operation[] result;
@@ -32,12 +33,13 @@ public class b17406 {
 		K = Integer.parseInt(st.nextToken());
 		
 		A = new int[N + 1][M + 1];
+		A_copy = new int[N + 1][M + 1];
 
 		for(int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine(), " ");
 			
 			for(int j = 1; j <= M; j++) {
-				A[i][j] = Integer.parseInt(st.nextToken());
+				A[i][j] = A_copy[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
 		
@@ -66,7 +68,6 @@ public class b17406 {
 		if(count == K) {
 			for(int i = 0; i < K; i++) {
 				rotate(result[i].r, result[i].c, result[i].s);
-//				print();
 			}
 			
 			int a = Integer.MAX_VALUE;
@@ -79,6 +80,13 @@ public class b17406 {
 			}
 			
 			min = Math.min(min, a); //A값의 최솟값 갱신
+			
+			//배열 A 원본으로 되돌려놓기
+			for(int i = 1; i <= N; i++) {
+				for(int j = 1; j <= M; j++) {
+					A[i][j] = A_copy[i][j];
+				}
+			}
 			
 			return;
 		}
@@ -93,42 +101,30 @@ public class b17406 {
 		}
 	}
 
-//	public static void print() {
-//		for(int i = 1; i <= N; i++) {
-//			for(int j = 1; j <= M; j++) {
-//				System.out.print(A[i][j] + " ");
-//			}
-//			System.out.println();
-//		}
-//		System.out.println();
-//	}
-
 	public static void rotate(int r, int c, int s) {
 		int depth = (s * 2 + 1) / 2;
 		
 		for(int d = 0; d < depth; d++) {
 			int tmp = A[r - s + d][c - s + d];
 			
-			for(int i = c - s + d; i < (c + s - d); i++) { // →
-				A[r - s + d][i] = A[r - s + d][i + 1];
+			for(int i = r - s + d; i < (r + s - d); i++) { // ↑
+				A[i][c - s + d] = A[i + 1][c - s + d];
 			}
 			
-			for(int i = r - s + d; i < (r + s - d); i++) { // ↓
-				A[i][c + s - d] = A[i + 1][c + s - d]; 
+			for(int i = c - s + d; i < (c + s - d); i++) { // ←
+				A[r + s - d][i] = A[r + s - d][i + 1];
 			}
-			
-			for(int i = (c + s - d); i >= (c - s + d + 1); i--) { // ←
-				A[r + s - d][i] = A[r + s - d][i - 1]; 
-			}
-			
-			for(int i = (r + s - d); i >= (r - s + d + 1); i--) { // ↑
-				A[i][c - s + d] = A[i - 1][c - s + d]; 
-			}
-			
-			A[r - s + d + 1][c - s + d] = tmp;
-		}
 
-		
+			for(int i = (r + s - d); i >= (r - s + d + 1); i--) { // ↓
+				A[i][c + s - d] = A[i - 1][c + s - d];
+			}
+
+			for(int i = (c + s - d); i >= (c - s + d + 1); i--) { // →
+				A[r - s + d][i] = A[r - s + d][i - 1]; 
+			}
+			
+			A[r - s + d][c - s + d + 1] = tmp;
+		}
 	}
 
 }
