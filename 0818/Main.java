@@ -9,7 +9,6 @@ public class Main {
 	static int[] dx = {-1, 1, 0, 0};
 	static int[] dy = {0, 0, -1, 1};
 	static boolean[] alphabet;
-	static int count;
 	static int max;
 
 	public static void main(String[] args) throws IOException {
@@ -31,7 +30,6 @@ public class Main {
 		}
 		
 		alphabet = new boolean[26];
-		count = 1;
 		max = 0;
 		
 		dfs(1, 1, 1);
@@ -39,7 +37,7 @@ public class Main {
 		System.out.println(max);
 	}
 
-	private static void dfs(int x, int y, int count) {	
+	public static void dfs(int x, int y, int count) {	
 		alphabet[graph[x][y] - 'A'] = true; //알파벳 중복 안되게 처리
 		
 		for(int i = 0; i < 4; i++) { //상하좌우 탐색
@@ -52,8 +50,9 @@ public class Main {
 				}
 			}
 		}
-		alphabet[graph[x][y] - 'A'] = false;
 		
+		//탐색 끝남
+		alphabet[graph[x][y] - 'A'] = false;
 		max = Math.max(max, count);
 	}
 
