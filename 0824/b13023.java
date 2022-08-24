@@ -8,7 +8,6 @@ public class b13023 {
 	static int N;
 	static ArrayList<Integer>[] graph;
 	static boolean[] visited;
-	static int answer = 0;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -36,37 +35,36 @@ public class b13023 {
 		int answer = 0;
 		for(int i = 0; i < M; i++) {
 			visited = new boolean[N];
-			dfs(i, 0);
+			visited[i] = true;
 			
-			System.out.println(answer);
-			
-			if(answer == 1) {
+			if(dfs(i, 0)) {
+				answer = 1;
 				break;
 			}
-			
-			System.out.println();
 		}
 		
 		//출력
 		System.out.println(answer);
 	}
 
-	public static void dfs(int idx, int depth) {
-		System.out.println(idx + " " + depth);
+	public static boolean dfs(int idx, int depth) {
 		if(depth == 4) {
-//			System.out.println("된다!");
-			
-			answer = 1;
-			return;
+			return true;
 		}
 		
 		for(int i = 0; i < graph[idx].size(); i++) {
 			if(visited[graph[idx].get(i)]) continue;
 			
 			visited[graph[idx].get(i)] = true;
-			dfs(graph[idx].get(i), depth +  1);
+			
+			if(dfs(graph[idx].get(i), depth +  1)) {
+				return true;
+			}
+			
 			visited[graph[idx].get(i)] = false;
 		}
+		
+		return false;
 	}
 
 }
