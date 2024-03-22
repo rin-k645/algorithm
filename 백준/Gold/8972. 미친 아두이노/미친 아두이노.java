@@ -57,21 +57,23 @@ public class Main {
 				X = i + 1;
 				break;
 			}
-//			System.out.println("========");
 		}
 		
 		//출력
+		StringBuilder sb = new StringBuilder();
+		
 		if(stopped) {
-			System.out.println("kraj " + X);
+			sb.append("kraj " + X);
 		} else {
 			for(int i = 0; i < R; i++) {
 				for(int j = 0; j < C; j++) {
-					System.out.print(graph[i][j]);
+					sb.append(graph[i][j]);
 				}
-				System.out.println();
+				sb.append("\n");
 			}
 		}
 		
+		System.out.println(sb);
 	}
 
 	public static boolean moveJongsu(int dir) {
@@ -105,8 +107,6 @@ public class Main {
 				
 				int dist = Math.abs(jongsu[0] - nxTmp) + Math.abs(jongsu[1] - nyTmp);
 				
-//				System.out.print(dist + " ");
-				
 				if(dist < minDist) {
 					minDist = dist;
 					minDir = dir;
@@ -114,8 +114,6 @@ public class Main {
 					ny = y + dy[minDir];
 				}
 			}
-//			System.out.println();
-//			System.out.println(ardu + ": " + minDir);
 			
 			if(nx == jongsu[0] && ny == jongsu[1]) { //종수와 충돌
 				return false;
@@ -135,7 +133,6 @@ public class Main {
 			if(nextMap.get(ardu) >= 2) {
 				nextMap.remove(ardu);
 				graph[ardu / C][ardu % C] = '.';
-//				System.out.println(ardu + " 충돌");
 			}
 		}
 		
@@ -147,13 +144,6 @@ public class Main {
 			crazySet.add(ardu);
 			
 		}
-		
-//		for(int i = 0; i < R; i++) {
-//			for(int j = 0; j < C; j++) {
-//				System.out.print(graph[i][j]);
-//			}
-//			System.out.println();
-//		}
 		
 		return true;
 	}
