@@ -28,13 +28,11 @@ public class Main {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		boolean isAllZero = true;
 		for(String s : arr) {
-			if(!s.equals("0")) isAllZero = false;
 			sb.append(s);
 		}
 		
-		if(isAllZero) {
+		if(arr[0].equals("0")) {
 			System.out.println(0);
 		} else {
 			System.out.println(sb);
