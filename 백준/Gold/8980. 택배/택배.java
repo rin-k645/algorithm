@@ -35,7 +35,7 @@ public class Main {
 			int num = box[i][2];
 			
 			//보낼 수 있는 최선의 택배 용량 구하기
-			int bestCap = 2000;
+			int bestCap = Integer.MAX_VALUE;
 			for(int j = t1; j < t2; j++) {
 				bestCap = Math.min(bestCap, cap[j]);
 			}
