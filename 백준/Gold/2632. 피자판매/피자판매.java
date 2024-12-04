@@ -28,20 +28,17 @@ public class Main {
 		}
 		
 		//구현
-		HashMap<Integer, Integer> Amap = new HashMap<>();
-		HashMap<Integer, Integer> Bmap = new HashMap<>();
+		int[] arrA = new int[Math.max(sumA, N) + 1];
+		int[] arrB = new int[Math.max(sumB, N) + 1];
 		
-		Amap.put(0, 1);
-		Bmap.put(0, 1);
-		
-		Amap.put(sumA, 1);
-		Bmap.put(sumB, 1);
+		arrA[0] = arrA[sumA] = 1;
+		arrB[0] = arrB[sumB] = 1;
 		
 		for(int i = 0; i < n; i++) {
 			int sum = 0;
 			for(int j = i; j < i + n - 1; j++) {
 				sum += A[j % n];
-				Amap.put(sum, Amap.getOrDefault(sum, 0) + 1);
+				arrA[sum]++;
 			}
 		}
 		
@@ -49,7 +46,7 @@ public class Main {
 			int sum = 0;
 			for(int j = i; j < i + m - 1; j++) {
 				sum += B[j % m];
-				Bmap.put(sum, Bmap.getOrDefault(sum, 0) + 1);
+				arrB[sum]++;
 			}
 		}
 		
@@ -57,7 +54,7 @@ public class Main {
 		int answer = 0;
 		
 		for(int i = 0; i <= N; i++) {
-			answer += Amap.getOrDefault(i, 0) * Bmap.getOrDefault(N - i, 0);
+			answer += arrA[i] * arrB[N - i];
 		}
 		
 		//출력
