@@ -7,40 +7,29 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
-		int[][] arr = new int[N][2];
+		int[] arr = new int[N]; //원본 배열
+		int[] sortedArr = new int[N]; //정렬된 배열
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < N; i++) {
-			int x = Integer.parseInt(st.nextToken());
-			arr[i][0] = i; //인덱스
-			arr[i][1] = x; //좌표
+			arr[i] = sortedArr[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		Arrays.sort(arr, (o1, o2) -> o1[1] - o2[1]); //좌표 오름차순 정렬
+		Arrays.sort(sortedArr); //오름차순 정렬
 		
-		
-		int[][] answer = new int[N][2];
-		
-		int count = -1; //앞에 몇 개 있는지
-		int pre = Integer.MAX_VALUE;
-		for(int i = 0; i < N; i++) {
-			int idx = arr[i][0];
-			int value = arr[i][1];
-			
-			if(value != pre) count++;
-			
-			answer[i][0] = idx;
-			answer[i][1] = count;
-			
-			pre = value;
+		HashMap<Integer, Integer> map = new HashMap<>(); //숫자, 순위
+		int count = 0; //순위
+		for(int x : sortedArr) {
+			if(!map.containsKey(x)) {
+				map.put(x, count);
+				count++;
+			}
 		}
-		
-		Arrays.sort(answer, (o1, o2) -> o1[0] - o2[0]); //인덱스 오름차순 정렬
 		
 		StringBuilder sb = new StringBuilder();
-		for(int[] a : answer) {
-			int c = a[1];
-			sb.append(c + " ");
+		for(int x : arr) {
+			int rank = map.get(x);
+			sb.append(rank + " ");
 		}
 		
 		System.out.println(sb);
