@@ -90,21 +90,21 @@ public class Main {
             min = sum[4];
             result_list = new ArrayList<>(tmp_list);
         } else if (isPossible && sum[4] == min) {
-            List<Integer> newResult = new ArrayList<>(tmp_list);
-            if (compareLists(newResult, result_list) < 0) {
-                result_list = new ArrayList<>(newResult);
+            if (compareLists(tmp_list, result_list) < 0) {
+                result_list = new ArrayList<>(tmp_list);
             }
         }
 	}
 	
+	// 사전순으로 빠른지 비교
 	public static int compareLists(List<Integer> list1, List<Integer> list2) {
         int size = Math.min(list1.size(), list2.size());
-        for (int i = 0; i < size; i++) {
-            if (list1.get(i) < list2.get(i)) return -1;
-            if (list1.get(i) > list2.get(i)) return 1;
+        for(int i = 0; i < size; i++) {
+            if(list1.get(i) < list2.get(i)) return -1;
+            if(list1.get(i) > list2.get(i)) return 1;
         }
-        if (list1.size() < list2.size()) return -1;
-        if (list1.size() > list2.size()) return 1;
+        if(list1.size() < list2.size()) return -1;
+        if(list1.size() > list2.size()) return 1;
         return 0;
     }
 
