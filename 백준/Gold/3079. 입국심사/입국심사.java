@@ -11,15 +11,15 @@ public class Main {
 		int M = Integer.parseInt(st.nextToken());
 		
 		int[] T = new int[N];
+		long max_time = 0;
 		
 		for(int i = 0; i < N; i++) {
 			T[i] = Integer.parseInt(br.readLine());
+			max_time = Math.max(max_time, T[i]);
 		}
 		
-		Arrays.sort(T);
-		
 		long low = 1;
-		long high = (long)T[N - 1] * M;
+		long high = max_time * M;
 		long answer = Long.MAX_VALUE;
 		
 		while(low <= high) {
@@ -34,7 +34,7 @@ public class Main {
 			
 			if(count >= M) {
 				high = mid - 1;
-				answer = Math.min(answer, mid);
+				answer = mid;
 			} else {
 				low = mid + 1;
 			}
