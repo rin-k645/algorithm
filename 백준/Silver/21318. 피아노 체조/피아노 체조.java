@@ -8,15 +8,13 @@ public class Main {
 		
 		int N = Integer.parseInt(br.readLine());
 		int[] arr = new int[N + 1];
+		int[] dp = new int[N + 1]; //i번째까지 실수하는 곡 개수
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i = 1; i < N + 1; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
-		}
-		
-		int[] dp = new int[N + 1]; //i번째까지 실수하는 곡 개수
-		for(int i = 1; i <= N - 1; i++) {
-			if(arr[i] > arr[i + 1]) { //실수하게 되는 경우
+			
+			if(arr[i - 1] > arr[i]) { //실수하게 되는 경우
 				dp[i] = dp[i - 1] + 1;
 			} else {
 				dp[i] = dp[i - 1];
@@ -30,7 +28,7 @@ public class Main {
 			int x = Integer.parseInt(st.nextToken());
 			int y = Integer.parseInt(st.nextToken());
 			
-			sb.append(dp[y - 1] - dp[x - 1] + "\n");
+			sb.append(dp[y] - dp[x] + "\n");
 		}
 		System.out.println(sb);
 	}
