@@ -19,8 +19,8 @@ public class Main {
 		// 시작 시간, 끝나는 시간 오름차순 정렬
 		Arrays.sort(arr, (o1, o2) -> o1[0] == o2[0] ? o1[1] - o2[1] : o1[0] - o2[0]);
 
-		// (자리 번호, 끝나는 시간)이 삽입되어 끝나는 시간, 번호 작은 순 오름차순 정렬되는 우선순위 큐
-		PriorityQueue<int[]> pq1 = new PriorityQueue<>((o1, o2) -> o1[1] == o2[1] ? o1[0] - o2[0] : o1[1] - o2[1]);
+		// (자리 번호, 끝나는 시간)이 삽입되어 끝나는 시간 오름차순 정렬되는 우선순위 큐
+		PriorityQueue<int[]> pq1 = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
 		
 		HashMap<Integer, Integer> map = new HashMap<>(); // 번호, 사람 수 기록
 		int idx = 0; // 자리 번호
