@@ -6,47 +6,40 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int[] calendar = new int[367];
-		
 		int N = Integer.parseInt(br.readLine());
 		
+		int[] arr = new int[367];
+		
 		for(int i = 0; i < N; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-			int start = Integer.parseInt(st.nextToken());
-			int end = Integer.parseInt(st.nextToken());
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int S = Integer.parseInt(st.nextToken());
+			int E = Integer.parseInt(st.nextToken());
 			
-			calendar[start] += 1;
-			calendar[end + 1] += -1;
+			arr[S] += 1;
+			arr[E + 1] -= 1;
 		}
 		
-		//탐색
-		int area = 0;
-		boolean opened = false;
-		int start = 0, end = 0;
-		int sum = 0;
-		int max = 0;
+		// 누적합
+        for (int i = 1; i <= 366; i++) {
+            arr[i] += arr[i - 1];
+        }
+		
+		int answer = 0; // 정답: 면적
+		int width = 0; // 가로 길이
+		int height = 0; // 세로 길이
 		
 		for(int i = 1; i <= 366; i++) {
-			if(!opened && calendar[i] > 0) {
-				start = i;
-				opened = true;
-			}
-			
-			if(opened) {
-				sum += calendar[i];
-				max = Math.max(max, sum);
-				
-				if(sum == 0) { //일정 연속 종료
-					end = i;
-					opened = false;
-					area += (end - start) * max;
-					sum = 0;
-					max = 0;
-				}
+			if(arr[i] > 0) { // 일정 시작
+				width++;
+				height = Math.max(height, arr[i]);
+			} else { // 일정 끝남
+				answer += width * height;
+				width = 0;
+                height = 0;
 			}
 		}
 		
-		System.out.println(area);
+		System.out.println(answer);
 	}
 
 }
