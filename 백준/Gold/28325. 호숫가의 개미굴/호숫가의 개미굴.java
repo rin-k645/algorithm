@@ -18,50 +18,41 @@ public class Main {
 		}
 		
 		// 구현
-		long answer = 0;
-		if(sum == 0) {
-			answer = (N + 1) / 2;
-		} else {
-			answer += sum;
-			
-			// 시작 구간
-			int start = 0;
-	        int i = 0;
-	        while(i < N && arr[i] == 0) {
-	        	start++;
-	            i++;
-	        }
-	        
-	        // 끝
-	        int end = 0;
-	        i = N - 1;
-	        while(i >= 0 && arr[i] == 0) {
-	        	end++;
-	            i--;
-	        }
-	        
-	        // 중간
-	        int count = 0;
-	        for(i = start; i < N - end; i++) {
-	            if(arr[i] == 0) {
-	            	count++;
-	            } else {
-	                answer += (count + 1) / 2;
-	                count = 0;
-	            }
-
-	        }
-	        
-	        // 끝 ~ 시작
-	        if(arr[0] == 0 && arr[N - 1] == 0) {
-	            answer += (start + end + 1) / 2;
-	        } else {
-	            if(start > 0) answer += (start + 1) / 2;
-	            if(end > 0) answer += (end + 1) / 2;
-	        }
-		}
+		if(sum == 0){
+            System.out.println((N + 1) / 2);
+            return;
+        }
 		
-		// 출력
+		long answer = sum;
+        List<Integer> list = new ArrayList<>();
+
+        int i = 0;
+        while(i < N) {
+            if(arr[i] != 0) {
+                i++;
+                continue;
+            }
+
+            int len = 0;
+            while(i < N && arr[i] == 0) {
+                len++;
+                i++;
+            }
+            list.add(len);
+        }
+
+        // 원형 처리
+        if(arr[0] == 0 && arr[N - 1] == 0 && list.size() > 1) {
+            int first = list.get(0);
+            int last = list.get(list.size() - 1);
+            list.set(0, first + last);
+            list.remove(list.size() - 1);
+        }
+
+        for(int len : list) {
+            answer += (len + 1) / 2;
+        }
+
         System.out.println(answer);
 	}
 
