@@ -53,7 +53,12 @@ public class Main {
 	        }
 	        
 	        // 끝 ~ 시작
-	        answer += (start + end + 1) / 2;
+	        if(arr[0] == 0 && arr[N - 1] == 0) {
+	            answer += (start + end + 1) / 2;
+	        } else {
+	            if(start > 0) answer += (start + 1) / 2;
+	            if(end > 0) answer += (end + 1) / 2;
+	        }
 		}
 		
 		// 출력
