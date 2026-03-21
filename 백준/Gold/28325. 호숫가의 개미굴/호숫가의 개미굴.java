@@ -8,11 +8,14 @@ public class Main {
 		
 		int N = Integer.parseInt(br.readLine());
 		
-		long[] arr = new long[N + 1];
+		long[] arr = new long[N];
 		long sum = 0; // 쪽방 합
 	
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringTokenizer st = new StringTokenizer("");
 		for(int i = 0; i < N; i++) {
+			while (!st.hasMoreTokens()) {
+		        st = new StringTokenizer(br.readLine());
+		    }
 			arr[i] = Long.parseLong(st.nextToken());
 			// 쪽방에 개미를 넣는 것이 최대
 			sum += arr[i];
@@ -27,7 +30,6 @@ public class Main {
 		
 		// 나머지 경우
 		long answer = sum;
-        List<Integer> list = new ArrayList<>();
 
         // 0이 아닌 구간 찾기
         int start = 0;
