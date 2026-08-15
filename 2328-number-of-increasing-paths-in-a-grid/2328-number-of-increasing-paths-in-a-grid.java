@@ -11,10 +11,6 @@ class Solution {
 
         dp = new int[m][n];
 
-        for(int[] d : dp) {
-            Arrays.fill(d, -1);
-        }
-
         int answer = 0;
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
@@ -25,7 +21,7 @@ class Solution {
     }
 
     private int dfs(int i, int j) {
-        if(dp[i][j] != -1) {
+        if(dp[i][j] != 0) {
             return dp[i][j];
         }
 
