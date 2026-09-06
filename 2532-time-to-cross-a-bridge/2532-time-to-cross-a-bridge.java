@@ -43,15 +43,16 @@ class Solution {
                 cur += time[idx][0]; // 왼쪽 -> 오른쪽 이동
                 pickQueue.add(new int[]{idx, cur + time[idx][1]});
                 remain--;
-            } else { // 대기 인부 없음
-                int nextTime = Integer.MAX_VALUE;
-                if(!pickQueue.isEmpty()) {
-                    nextTime = Math.min(nextTime, pickQueue.peek()[1]);
+            } else { // 대기 인부 없음 = 작업중 -> 시간 옮기기
+                int next;
+                if (pickQueue.isEmpty()) {
+                    next = putQueue.peek()[1];
+                } else if (putQueue.isEmpty()) {
+                    next = pickQueue.peek()[1];
+                } else {
+                    next = Math.min(pickQueue.peek()[1], putQueue.peek()[1]);
                 }
-                if(!putQueue.isEmpty()) {
-                    nextTime = Math.min(nextTime, putQueue.peek()[1]);
-                }
-                cur = nextTime;
+                cur = next;
             }
 
             // 작업 끝난 인부 대기 큐로 이동
